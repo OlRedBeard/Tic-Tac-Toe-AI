@@ -89,7 +89,7 @@ namespace GerritDifficultPlayer
                             else
                                 return availableMoves[8];
                         }
-                    } // Bottom left corner
+                    } // Bottom left corner https://www.wikihow.com/Win-at-Tic-Tac-Toe#Never_Losing_when_Playing_Second_sub
                     // Bottom right corner
                 }
             }
