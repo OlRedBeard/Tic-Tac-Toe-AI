@@ -46,6 +46,8 @@ namespace TicTacToe
 
         public void Play()
         {
+            UpdateBothPlayers();
+
             while(AvailableMoves.Count != 0 && winner == null)
             {
                 // Create a variable to hold a move

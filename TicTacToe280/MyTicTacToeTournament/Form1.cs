@@ -19,6 +19,8 @@ namespace MyTicTacToeTournament
 {
     public partial class Form1 : Form
     {
+        ITicTacToePlayer winner = null;
+
         public Form1()
         {
             InitializeComponent();
@@ -26,16 +28,21 @@ namespace MyTicTacToeTournament
 
         private void button1_Click(object sender, EventArgs e)
         {
+            winner = null;
             TicTacToeEasy p1 = new TicTacToeEasy(1);
             TicTacToeBase p2 = new TicTacToeBase(-1);
             GameState g = new GameState(p1, p2);
             g.WinnerIs += G_WinnerIs;
             g.Play();
+            if(winner == null)
+                MessageBox.Show("Tie");
+            else
+                MessageBox.Show(winner.Name() + " won the game!");
         }
 
         private void G_WinnerIs(TicTacToeBasePlayer.ITicTacToePlayer p)
         {
-            MessageBox.Show(p.Name() + " won the game!");
+            this.winner = p;
         }
     }
 }

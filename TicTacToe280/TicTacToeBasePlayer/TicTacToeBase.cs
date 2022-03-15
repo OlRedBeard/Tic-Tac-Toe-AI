@@ -9,7 +9,7 @@ namespace TicTacToeBasePlayer
         private static Random srnd = new Random();
         protected Random rnd = new Random(srnd.Next());
         // Make a game board to represent the game state
-        int[,] board;
+        protected int[,] board;
         protected string playerName = "";
         protected int symbol = 0;
         protected List<Tuple<int, int>> availableMoves = new List<Tuple<int, int>>();
