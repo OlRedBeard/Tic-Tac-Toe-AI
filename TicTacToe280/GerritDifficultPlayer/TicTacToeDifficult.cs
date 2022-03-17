@@ -171,15 +171,122 @@ namespace GerritDifficultPlayer
             // THIS PLAYER GOES FIRST - THIRD TURN
             else if (availableMoves.Count == 5)
             {
-                if (this.board[0, 0] == this.symbol) // one symbol top-left
+                if (this.board[1, 1] != 0 && this.board[1, 1] != this.symbol) // OPPONENT HAS CENTER
                 {
-
-                }
-                else if (this.board[0,2] == this.symbol) // one symbol top-right
+                    if (this.board[0, 1] != 0 && this.board[0, 1] != this.symbol) // opponent has top-center
+                    {
+                        if (this.board[2, 1] == 0)
+                            return availableMoves[7]; // opponent could win vertically center, block with bottom-center
+                    }
+                    else if (this.board[2, 1] != 0 && this.board[2, 1] != this.symbol) // oponent has bottom-center
+                    {
+                        if (this.board[0, 1] == 0)
+                            return availableMoves[1]; // opponent could win vertically center, block with top-center
+                    }
+                    else if (this.board[1, 0] != 0 && this.board[1, 0] != this.symbol) // opponent has center-left
+                    {
+                        if (this.board[1, 2] == 0) // opponent could win horizontally center, block with center-right
+                            return availableMoves[5];
+                    }
+                    else if (this.board[1, 2] != 0 && this.board[1, 2] != this.symbol) // opponent has center-right
+                    {
+                        if (this.board[1, 0] == 0)
+                            return availableMoves[3]; // opponent could win horizontally center, block with center-left
+                    }
+                    else if (this.board[0, 0] != 0 && this.board[0, 0] != this.symbol) // opponent has top-left
+                    {
+                        if (this.board[2, 2] == 0)
+                            return availableMoves[8]; // opponent could win diagonally tl-br, block with bottom-right
+                    }
+                    else if (this.board[2, 2] != 0 && this.board[2, 2] != this.symbol) // opponent has bottom-right
+                    {
+                        if (this.board[0, 0] == 0)
+                            return availableMoves[0]; // opponent could win diagonally tl-br, block with top-left
+                    }
+                    else if (this.board[0, 2] != 0 && this.board[0, 2] != this.symbol) // opponent has top-right
+                    {
+                        if (this.board[2, 0] == 0)
+                            return availableMoves[8]; // opponent could win diagonally tr-bl, block with bottom-left
+                    }
+                    else if (this.board[2, 0] != 0 && this.board[2, 0] != this.symbol) // opponent has bottom-left
+                    {
+                        if (this.board[0, 2] == 0)
+                            return availableMoves[0]; // opponent could win diagonally tl-br, block with top-right
+                    }
+                }                 
+                else if (this.board[1, 1] == 0) // OPPONENT DOES NOT HAVE CENTER
                 {
-
+                    if ((this.board[1, 0] != 0 && this.board[1, 0] != this.symbol)
+                        && (this.board[1, 2] != 0 && this.board[1, 2] != this.symbol)) // opponent could win center horizontal, block
+                        return availableMoves[4];
+                    else if ((this.board[0, 1] != 0 && this.board[0, 1] != this.symbol)
+                        && (this.board[2, 1] != 0 && this.board[2, 1] != this.symbol)) // opponent could win center vertical, block
+                        return availableMoves[4];
                 }
-                else if (this.board[2,0] == this.symbol) // one symbol bottom-left
+                else if (this.board[0, 0] == this.symbol) // ALL CLEAR - first symbol top-left
+                {
+                    if (this.board[0, 2] == this.symbol) // second symbol top-right
+                    {
+                        if (this.board[0, 1] == 0) // spot between is free, win game
+                            return availableMoves[1];
+                        else if (this.board[2, 2] == 0) // bottom-left corner is free
+                            return availableMoves[6];
+                        else // bottom-right corner is free
+                            return availableMoves[8];
+                    }
+                    else if (this.board[2, 0] == this.symbol) // second symbol bottom-left
+                    {
+                        if (this.board[1, 0] == 0) //middle-left spot is free, win game
+                            return availableMoves[3];
+                        else if (this.board[0, 2] == 0) // top-right spot is free
+                            return availableMoves[2];
+                        else // bottom-right spot is free
+                            return availableMoves[8];
+                    }
+                    else // second symbol bottom-right
+                    {
+                        if (this.board[1, 1] == 0) // center spot is free, win game
+                            return availableMoves[4];
+                        else if (this.board[2, 0] == 0) // bottom-left spot is free
+                            return availableMoves[6];
+                        else // top-right spot is free
+                            return availableMoves[2];
+                    }
+                }
+                else if (this.board[0,2] == this.symbol) // first symbol top-right
+                {
+                    if (this.board[2, 2] == this.symbol) // second symbol bottom-right
+                    {
+                        if (this.board[2, 1] == 0)
+                            return availableMoves[5]; // center-right is free, win game
+                        else if (this.board[0, 2] == 0)
+                            return availableMoves[6]; // bottom-left is free
+                        else
+                            return availableMoves[0]; // top-left is free
+                    }
+                    else if (this.board[2, 0] == this.symbol) // second symbol bottom-left
+                    {
+                        if (this.board[1, 1] == 0)
+                            return availableMoves[4]; // center is free, win game
+                        else if (this.board[2, 2] == 0)
+                            return availableMoves[8]; // bottom-left is free
+                        else
+                            return availableMoves[0]; // top-right is free
+                    }
+                }
+                else if (this.board[2,0] == this.symbol) // first symbol bottom-left
+                {
+                    if (this.board[2, 2] == this.symbol) // second symbol bottom-right
+                    {
+                        if (this.board[2, 1] == 0)
+                            return availableMoves[7]; // bottom-center is free, win game
+                        else if (this.board[0, 2] == 0)
+                            return availableMoves[2]; // top-right is free
+                        else
+                            return availableMoves[0]; // top-left is free
+                    }
+                }
+                else // first symbol bottom-right
                 {
 
                 }
