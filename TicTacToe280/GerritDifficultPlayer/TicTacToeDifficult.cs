@@ -12,289 +12,473 @@ namespace GerritDifficultPlayer
 
         public override Tuple<int, int> MakeMove()
         {
-            if (availableMoves.Count == 0)
-                return null;
-
-            #region goingfirst
-            // THIS PLAYER GOES FIRST - FIRST TURN
-            if (availableMoves.Count == 9)
+            Tuple<int, int> theMove = null;
+            // THIS PLAYER GOES FIRST
+            #region goingfirst            
+            if (availableMoves.Count == 9) // FIRST TURN
             {
                 int corner = rnd.Next(1, 5); // Take a corner spot
 
                 if (corner == 1)
-                    return availableMoves[0];
+                    theMove = new Tuple<int, int>(0, 0);
                 else if (corner == 2)
-                    return availableMoves[2];
+                    theMove = new Tuple<int, int>(0, 2);
                 else if (corner == 3)
-                    return availableMoves[6];
+                    theMove = new Tuple<int, int>(2, 0);
                 else
-                    return availableMoves[8];
-            }
-
-            // THIS PLAYER GOES FIRST - SECOND TURN
-            else if (availableMoves.Count == 7)
+                    theMove = new Tuple<int, int>(2, 2);
+            } // END OF FIRST TURN            
+            else if (availableMoves.Count == 7) // SECOND TURN
             {
-                if (this.board[1,1] == 0) // If the opposing player didn't take center space
+                if (this.board[1, 1] == 0) // If the opposing player didn't take center space
                 {
                     // Top left corner
-                    if (this.board[0,0] == this.symbol)
+                    if (this.board[0, 0] == this.symbol)
                     {
-                        if ((this.board[0, 1] != 0 && this.board[0, 1] != this.symbol) || (this.board[0, 2] != 0 && this.board[0, 2] != this.symbol))
+                        if ((this.board[0, 1] != 0 && this.board[0, 1] != this.symbol) || 
+                            (this.board[0, 2] != 0 && this.board[0, 2] != this.symbol))
                         {
                             int coin = rnd.Next(0, 1);
                             if (coin == 0)
-                                return availableMoves[6];
+                                theMove = new Tuple<int, int>(2,0);
                             else
-                                return availableMoves[8];
-                        }                      
-                        else if ((this.board[1, 0] != 0 && this.board[1, 0] != this.symbol) || (this.board[2, 0] != 0 && this.board[2, 0] != this.symbol))
+                                theMove = new Tuple<int, int>(2, 2);
+                        }
+                        else if ((this.board[1, 0] != 0 && this.board[1, 0] != this.symbol) || 
+                            (this.board[2, 0] != 0 && this.board[2, 0] != this.symbol))
                         {
                             int coin = rnd.Next(0, 1);
                             if (coin == 0)
-                                return availableMoves[2];
+                                theMove = new Tuple<int, int>(0, 1);
                             else
-                                return availableMoves[8];
+                                theMove = new Tuple<int, int>(2, 2);
                         }
                         else
                         {
                             int coin = rnd.Next(0, 1);
                             if (coin == 0)
-                                return availableMoves[2];
+                                theMove = new Tuple<int, int>(0, 1);
                             else
-                                return availableMoves[6];
-                        } 
+                                theMove = new Tuple<int, int>(2, 0);
+                        }
                     } // Top right corner
                     else if (this.board[0, 2] == this.symbol)
                     {
-                        if ((this.board[1, 2] != 0 && this.board[1, 2] != this.symbol) || (this.board[2, 2] != 0 && this.board[2, 2] != this.symbol))
+                        if ((this.board[1, 2] != 0 && this.board[1, 2] != this.symbol) || 
+                            (this.board[2, 2] != 0 && this.board[2, 2] != this.symbol))
                         {
                             int coin = rnd.Next(0, 1);
                             if (coin == 0)
-                                return availableMoves[0];
+                                theMove = new Tuple<int, int>(0, 0);
                             else
-                                return availableMoves[6];
+                                theMove = new Tuple<int, int>(2, 0);
                         }
-                        else if ((this.board[0, 0] != 0 && this.board[0, 0] != this.symbol) || (this.board[0, 1] != 0 && this.board[0, 1] != this.symbol))
+                        else if ((this.board[0, 0] != 0 && this.board[0, 0] != this.symbol) || 
+                            (this.board[0, 1] != 0 && this.board[0, 1] != this.symbol))
                         {
                             int coin = rnd.Next(0, 1);
                             if (coin == 0)
-                                return availableMoves[6];
+                                theMove = new Tuple<int, int>(2, 0);
                             else
-                                return availableMoves[8];
+                                theMove = new Tuple<int, int>(2, 2);
                         }
                         else
                         {
                             int coin = rnd.Next(0, 1);
                             if (coin == 0)
-                                return availableMoves[0];
+                                theMove = new Tuple<int, int>(0, 0);
                             else
-                                return availableMoves[8];
+                                theMove = new Tuple<int, int>(2, 2);
                         }
                     } // Bottom left corner 
                     else if (this.board[2, 0] == this.symbol)
                     {
-                        if ((this.board[2, 1] != 0 && this.board[2, 1] != this.symbol) || (this.board[2, 2] != 0 && this.board[2, 2] != this.symbol))
+                        if ((this.board[2, 1] != 0 && this.board[2, 1] != this.symbol) || 
+                            (this.board[2, 2] != 0 && this.board[2, 2] != this.symbol))
                         {
                             int coin = rnd.Next(0, 1);
                             if (coin == 0)
-                                return availableMoves[0];
+                                theMove = new Tuple<int, int>(0, 0);
                             else
-                                return availableMoves[2];
+                                theMove = new Tuple<int, int>(0, 2);
                         }
-                        else if ((this.board[0, 0] != 0 && this.board[0, 0] != this.symbol) || (this.board[1, 0] != 0 && this.board[1, 0] != this.symbol))
+                        else if ((this.board[0, 0] != 0 && this.board[0, 0] != this.symbol) || 
+                            (this.board[1, 0] != 0 && this.board[1, 0] != this.symbol))
                         {
                             int coin = rnd.Next(0, 1);
                             if (coin == 0)
-                                return availableMoves[2];
+                                theMove = new Tuple<int, int>(0, 2);
                             else
-                                return availableMoves[8];
+                                theMove = new Tuple<int, int>(2, 2);
                         }
                         else
                         {
                             int coin = rnd.Next(0, 1);
                             if (coin == 0)
-                                return availableMoves[0];
+                                theMove = new Tuple<int, int>(0, 0);
                             else
-                                return availableMoves[8];
+                                theMove = new Tuple<int, int>(2, 2);
                         }
                     } // Bottom right corner
                     else
                     {
-                        if ((this.board[2, 0] != 0 && this.board[2, 0] != this.symbol) || (this.board[2, 1] != 0 && this.board[2, 1] != this.symbol))
+                        if ((this.board[2, 0] != 0 && this.board[2, 0] != this.symbol) || 
+                            (this.board[2, 1] != 0 && this.board[2, 1] != this.symbol))
                         {
                             int coin = rnd.Next(0, 1);
                             if (coin == 0)
-                                return availableMoves[0];
+                                theMove = new Tuple<int, int>(0, 0);
                             else
-                                return availableMoves[2];
+                                theMove = new Tuple<int, int>(0, 2);
                         }
                         else if ((this.board[0, 2] != 0 && this.board[0, 2] != this.symbol) || (this.board[0, 1] != 0 && this.board[0, 1] != this.symbol))
                         {
                             int coin = rnd.Next(0, 1);
                             if (coin == 0)
-                                return availableMoves[0];
+                                theMove = new Tuple<int, int>(0, 0);
                             else
-                                return availableMoves[6];
+                                theMove = new Tuple<int, int>(2, 0);
                         }
                         else
                         {
                             int coin = rnd.Next(0, 1);
                             if (coin == 0)
-                                return availableMoves[2];
+                                theMove = new Tuple<int, int>(0, 2);
                             else
-                                return availableMoves[6];
+                                theMove = new Tuple<int, int>(2, 0);
                         }
                     }
                 } // If opposing player took the center space
                 else
+                {                    
+                    if (this.board[0, 0] == this.symbol) // Top left corner
+                        theMove = new Tuple<int, int>(2, 2); 
+                    else if (this.board[0, 2] == this.symbol) // Top right corner
+                        theMove = new Tuple<int, int>(2, 0); 
+                    else if (this.board[2, 0] == this.symbol) // Bottom left corner 
+                        theMove = new Tuple<int, int>(0, 2);
+                    else // Bottom right corner
+                        theMove = new Tuple<int, int>(0, 0); 
+                }
+
+                return theMove;
+            } // END OF SECOND TURN - NEEDS REVISION
+            // THIRD TURN
+            else if (availableMoves.Count == 5) 
+            {
+                // CHECK FOR WINS
+                theMove = CheckForWin();
+                if (theMove == null)
                 {
-                    // Top left corner
-                    if (this.board[0, 0] == this.symbol)
+                    // CHECK FOR BLOCKS
+                    theMove = CheckForBlock();
+                    if (theMove == null)
                     {
-                        return availableMoves[8];
-                    } // Top right corner
-                    else if (this.board[0, 2] == this.symbol)
+                        // SET UP TWO WINS
+                        // including upper left corner
+                        if (this.board[0,0] == this.symbol && this.board[0,2] == this.symbol)
+                        {
+                            if (this.board[2,0] == 0 && this.board[1,0] == 0)
+                                theMove = new Tuple<int, int>(2, 0);
+                            else
+                                theMove = new Tuple<int, int>(2, 2);
+                        }
+                        else if (this.board[0, 0] == this.symbol && this.board[2, 0] == this.symbol)
+                        {
+                            if (this.board[2, 2] == 0 && this.board[2, 1] == 0)
+                                theMove = new Tuple<int, int>(2, 2);
+                            else
+                                theMove = new Tuple<int, int>(0, 2);
+                        }
+                        // no upper left corner
+                        else if (this.board[0, 2] == this.symbol && this.board[2, 2] == this.symbol)
+                        {
+                            if (this.board[0, 0] == 0 && this.board[0, 1] == 0)
+                                theMove = new Tuple<int, int>(0, 0);
+                            else
+                                theMove = new Tuple<int, int>(2, 0);
+                        }
+                        else
+                        {
+                            if (this.board[0, 0] == 0 && this.board[0, 1] == 0)
+                                theMove = new Tuple<int, int>(0, 0);
+                            else
+                                theMove = new Tuple<int, int>(0, 2);
+                        }
+                    }
+                }                
+                
+                return theMove;
+            }
+
+            // THIS PLAYER GOES FIRST - SUBSEQUENT TURNS
+            else if (availableMoves.Count % 2 != 0)
+            {
+                // CHECK FOR WINS
+                theMove = CheckForWin();
+
+                if (theMove == null)
+                {
+                    // CHECK FOR BLOCKS
+                    theMove = CheckForBlock();
+                    if (theMove == null)
                     {
-                        return availableMoves[6];                        
-                    } // Bottom left corner 
-                    else if (this.board[2, 0] == this.symbol)
-                    {
-                        return availableMoves[2];
-                    } // Bottom right corner
+                        // TRY FOR CORNER
+                        if (this.board[0, 0] == 0)
+                            return new Tuple<int, int>(0, 0);
+                        else if (this.board[0, 2] == 0)
+                            return new Tuple<int, int>(0, 2);
+                        else if (this.board[2, 2] == 0)
+                            return new Tuple<int, int>(2, 2);
+                        else if (this.board[2, 0] == 0)
+                            return new Tuple<int, int>(2, 0);
+                        else
+                        {
+                            // NO CORNERS, PICK RANDOM SPOT
+                            int a = rnd.Next(0, availableMoves.Count);
+                            theMove = availableMoves[a];
+                        }
+                    }
+                }
+
+                return theMove;
+            }
+            #endregion
+
+            // THIS PLAYER GOES SECOND
+            #region goingsecond
+            else if (availableMoves.Count == 8) // FIRST TURN
+            {
+                // logic for if the opponent takes a corner
+                if ((this.board[0, 0] != 0 && this.board[0, 0] != this.symbol) ||
+                    (this.board[0, 2] != 0 && this.board[0, 2] != this.symbol) ||
+                    (this.board[2, 0] != 0 && this.board[2, 0] != this.symbol) ||
+                    (this.board[2, 2] != 0 && this.board[2, 2] != this.symbol))
+                    theMove = new Tuple<int, int>(1, 1);
+                // logic for if the opponent takes the center
+                else if (this.board[1,1] != 0 && this.board[1,1] != this.symbol)
+                {
+                    int corner = rnd.Next(0, 3);
+                    if (corner == 0)
+                        theMove = new Tuple<int, int>(0, 0);
+                    else if (corner == 1)
+                        theMove = new Tuple<int, int>(0, 2);
+                    else if (corner == 2)
+                        theMove = new Tuple<int, int>(2, 0);
+                    else
+                        theMove = new Tuple<int, int>(2, 2);
+                }                    
+                // logic for if the opponent takes an edge
+                else
+                    theMove = new Tuple<int, int>(1, 1);
+
+                return theMove;
+            }
+            else if (availableMoves.Count == 6) // SECOND TURN
+            {
+                // check for blocks
+                theMove = CheckForBlock();
+                // logic for spot to take
+                if (theMove == null)
+                {
+                    if (this.board[0, 0] == 0)
+                        theMove = new Tuple<int, int>(0, 0);
+                    else if (this.board[0, 2] == 0)
+                        theMove = new Tuple<int, int>(0, 2);
+                    else if (this.board[2, 2] == 0)
+                        theMove = new Tuple<int, int>(2, 2);
+                    else if (this.board[2, 0] == 0)
+                        theMove = new Tuple<int, int>(2, 0);
                     else
                     {
-                        return availableMoves[0];
+                        int spot = rnd.Next(0, availableMoves.Count);
+                        theMove = availableMoves[spot];
                     }
                 }
-            } // END OF SECOND TURN
 
-            // THIS PLAYER GOES FIRST - THIRD TURN
-            else if (availableMoves.Count == 5)
+                return theMove;
+            } 
+            else if (availableMoves.Count %2 == 0 && availableMoves.Count != 0)
             {
-                if (this.board[1, 1] != 0 && this.board[1, 1] != this.symbol) // OPPONENT HAS CENTER
-                {
-                    if (this.board[0, 1] != 0 && this.board[0, 1] != this.symbol) // opponent has top-center
-                    {
-                        if (this.board[2, 1] == 0)
-                            return availableMoves[7]; // opponent could win vertically center, block with bottom-center
-                    }
-                    else if (this.board[2, 1] != 0 && this.board[2, 1] != this.symbol) // oponent has bottom-center
-                    {
-                        if (this.board[0, 1] == 0)
-                            return availableMoves[1]; // opponent could win vertically center, block with top-center
-                    }
-                    else if (this.board[1, 0] != 0 && this.board[1, 0] != this.symbol) // opponent has center-left
-                    {
-                        if (this.board[1, 2] == 0) // opponent could win horizontally center, block with center-right
-                            return availableMoves[5];
-                    }
-                    else if (this.board[1, 2] != 0 && this.board[1, 2] != this.symbol) // opponent has center-right
-                    {
-                        if (this.board[1, 0] == 0)
-                            return availableMoves[3]; // opponent could win horizontally center, block with center-left
-                    }
-                    else if (this.board[0, 0] != 0 && this.board[0, 0] != this.symbol) // opponent has top-left
-                    {
-                        if (this.board[2, 2] == 0)
-                            return availableMoves[8]; // opponent could win diagonally tl-br, block with bottom-right
-                    }
-                    else if (this.board[2, 2] != 0 && this.board[2, 2] != this.symbol) // opponent has bottom-right
-                    {
-                        if (this.board[0, 0] == 0)
-                            return availableMoves[0]; // opponent could win diagonally tl-br, block with top-left
-                    }
-                    else if (this.board[0, 2] != 0 && this.board[0, 2] != this.symbol) // opponent has top-right
-                    {
-                        if (this.board[2, 0] == 0)
-                            return availableMoves[8]; // opponent could win diagonally tr-bl, block with bottom-left
-                    }
-                    else if (this.board[2, 0] != 0 && this.board[2, 0] != this.symbol) // opponent has bottom-left
-                    {
-                        if (this.board[0, 2] == 0)
-                            return availableMoves[0]; // opponent could win diagonally tl-br, block with top-right
-                    }
-                }                 
-                else if (this.board[1, 1] == 0) // OPPONENT DOES NOT HAVE CENTER
-                {
-                    if ((this.board[1, 0] != 0 && this.board[1, 0] != this.symbol)
-                        && (this.board[1, 2] != 0 && this.board[1, 2] != this.symbol)) // opponent could win center horizontal, block
-                        return availableMoves[4];
-                    else if ((this.board[0, 1] != 0 && this.board[0, 1] != this.symbol)
-                        && (this.board[2, 1] != 0 && this.board[2, 1] != this.symbol)) // opponent could win center vertical, block
-                        return availableMoves[4];
-                }
-                else if (this.board[0, 0] == this.symbol) // ALL CLEAR - first symbol top-left
-                {
-                    if (this.board[0, 2] == this.symbol) // second symbol top-right
-                    {
-                        if (this.board[0, 1] == 0) // spot between is free, win game
-                            return availableMoves[1];
-                        else if (this.board[2, 2] == 0) // bottom-left corner is free
-                            return availableMoves[6];
-                        else // bottom-right corner is free
-                            return availableMoves[8];
-                    }
-                    else if (this.board[2, 0] == this.symbol) // second symbol bottom-left
-                    {
-                        if (this.board[1, 0] == 0) //middle-left spot is free, win game
-                            return availableMoves[3];
-                        else if (this.board[0, 2] == 0) // top-right spot is free
-                            return availableMoves[2];
-                        else // bottom-right spot is free
-                            return availableMoves[8];
-                    }
-                    else // second symbol bottom-right
-                    {
-                        if (this.board[1, 1] == 0) // center spot is free, win game
-                            return availableMoves[4];
-                        else if (this.board[2, 0] == 0) // bottom-left spot is free
-                            return availableMoves[6];
-                        else // top-right spot is free
-                            return availableMoves[2];
-                    }
-                }
-                else if (this.board[0,2] == this.symbol) // first symbol top-right
-                {
-                    if (this.board[2, 2] == this.symbol) // second symbol bottom-right
-                    {
-                        if (this.board[2, 1] == 0)
-                            return availableMoves[5]; // center-right is free, win game
-                        else if (this.board[0, 2] == 0)
-                            return availableMoves[6]; // bottom-left is free
-                        else
-                            return availableMoves[0]; // top-left is free
-                    }
-                    else if (this.board[2, 0] == this.symbol) // second symbol bottom-left
-                    {
-                        if (this.board[1, 1] == 0)
-                            return availableMoves[4]; // center is free, win game
-                        else if (this.board[2, 2] == 0)
-                            return availableMoves[8]; // bottom-left is free
-                        else
-                            return availableMoves[0]; // top-right is free
-                    }
-                }
-                else if (this.board[2,0] == this.symbol) // first symbol bottom-left
-                {
-                    if (this.board[2, 2] == this.symbol) // second symbol bottom-right
-                    {
-                        if (this.board[2, 1] == 0)
-                            return availableMoves[7]; // bottom-center is free, win game
-                        else if (this.board[0, 2] == 0)
-                            return availableMoves[2]; // top-right is free
-                        else
-                            return availableMoves[0]; // top-left is free
-                    }
-                }
-                else // first symbol bottom-right
-                {
+                
+                // CHECK FOR WINS
+                theMove = CheckForWin();
 
+                if (theMove == null)
+                {
+                    // NO POSSIBLE WINS - CHECK FOR BLOCKS
+                    theMove = CheckForBlock();
+                    if (theMove == null)
+                    {
+                        // NO BLOCKS NEEDED
+                        if (this.board[0, 0] == 0)
+                            theMove = new Tuple<int, int>(0, 0);
+                        else if (this.board[0, 2] == 0)
+                            theMove = new Tuple<int, int>(0, 2);
+                        else if (this.board[2, 2] == 0)
+                            theMove = new Tuple<int, int>(2, 2);
+                        else if (this.board[2, 0] == 0)
+                            theMove = new Tuple<int, int>(2, 0);
+                        else
+                        {
+                            int a = rnd.Next(0, availableMoves.Count);
+                            theMove = availableMoves[a];
+                        }
+                    }
                 }
-            } // END OF THIRD TURN
+
+                return theMove;
+            }
             #endregion
             // https://www.wikihow.com/Win-at-Tic-Tac-Toe#Never_Losing_when_Playing_Second_sub
+            return theMove;
+        }
 
-            return availableMoves[0]; // CHANGE THIS! SILENCING ERROR!
+        public Tuple<int, int> CheckForWin()
+        {
+            // horizontal on top row
+            if (this.board[0, 0] == this.symbol && this.board[0, 1] == this.symbol && this.board[0, 2] == 0)
+                return new Tuple<int, int>(0, 2);
+            else if (this.board[0, 0] == this.symbol && this.board[0, 2] == this.symbol && this.board[0, 1] == 0)
+                return new Tuple<int, int>(0, 1);
+            else if (this.board[0, 1] == this.symbol && this.board[0, 2] == this.symbol && this.board[0, 0] == 0)
+                return new Tuple<int, int>(0, 0);
+            // horizontal on center row
+            else if (this.board[1, 0] == this.symbol && this.board[1, 1] == this.symbol && this.board[1, 2] == 0)
+                return new Tuple<int, int>(1, 2);
+            else if (this.board[1, 0] == this.symbol && this.board[1, 2] == this.symbol && this.board[1, 1] == 0)
+                return new Tuple<int, int>(1, 1);
+            else if (this.board[1, 1] == this.symbol && this.board[1, 2] == this.symbol && this.board[1, 0] == 0)
+                return new Tuple<int, int>(1, 0);
+            // horizontal on bottom row
+            else if (this.board[2, 0] == this.symbol && this.board[2, 1] == this.symbol && this.board[2, 2] == 0)
+                return new Tuple<int, int>(2, 2);
+            else if (this.board[2, 0] == this.symbol && this.board[2, 2] == this.symbol && this.board[2, 1] == 0)
+                return new Tuple<int, int>(2, 1);
+            else if (this.board[2, 1] == this.symbol && this.board[2, 2] == this.symbol && this.board[2, 0] == 0)
+                return new Tuple<int, int>(2, 0);
+            // vertical on left column
+            else if (this.board[0, 0] == this.symbol && this.board[1, 0] == this.symbol && this.board[2, 0] == 0)
+                return new Tuple<int, int>(2, 0);
+            else if (this.board[0, 0] == this.symbol && this.board[2, 0] == this.symbol && this.board[1, 0] == 0)
+                return new Tuple<int, int>(1, 0);
+            else if (this.board[1, 0] == this.symbol && this.board[2, 0] == this.symbol && this.board[0, 0] == 0)
+                return new Tuple<int, int>(0, 0);
+            // veritcal on center column
+            else if (this.board[0, 1] == this.symbol && this.board[1, 1] == this.symbol && this.board[2, 1] == 0)
+                return new Tuple<int, int>(2, 1);
+            else if (this.board[0, 1] == this.symbol && this.board[2, 1] == this.symbol && this.board[1, 1] == 0)
+                return new Tuple<int, int>(1, 1);
+            else if (this.board[1, 1] == this.symbol && this.board[2, 1] == this.symbol && this.board[0, 1] == 0)
+                return new Tuple<int, int>(0, 1);
+            // vertical on right column
+            else if (this.board[0, 2] == this.symbol && this.board[1, 2] == this.symbol && this.board[2, 2] == 0)
+                return new Tuple<int, int>(2, 2);
+            else if (this.board[0, 2] == this.symbol && this.board[2, 2] == this.symbol && this.board[1, 2] == 0)
+                return new Tuple<int, int>(1, 2);
+            else if (this.board[1, 2] == this.symbol && this.board[2, 2] == this.symbol && this.board[0, 2] == 0)
+                return new Tuple<int, int>(0, 2);
+            // vertical down right
+            else if (this.board[0, 0] == this.symbol && this.board[1, 1] == this.symbol && this.board[2, 2] == 0)
+                return new Tuple<int, int>(2, 2);
+            else if (this.board[0, 0] == this.symbol && this.board[2, 2] == this.symbol && this.board[1, 1] == 0)
+                return new Tuple<int, int>(1, 1);
+            else if (this.board[1, 1] == this.symbol && this.board[2, 2] == this.symbol && this.board[0, 0] == 0)
+                return new Tuple<int, int>(0, 0);
+            // vertical up right
+            else if (this.board[2, 0] == this.symbol && this.board[1, 1] == this.symbol && this.board[0, 2] == 0)
+                return new Tuple<int, int>(0, 2);
+            else if (this.board[2, 0] == this.symbol && this.board[0, 2] == this.symbol && this.board[1, 1] == 0)
+                return new Tuple<int, int>(1, 1);
+            else if (this.board[1, 1] == this.symbol && this.board[2, 0] == this.symbol && this.board[2, 0] == 0)
+                return new Tuple<int, int>(2, 0);
+            else
+                return null;
+        }
+        public Tuple<int, int> CheckForBlock()
+        {
+            // horizontal top row
+            if ((this.board[0, 0] != 0 && this.board[0, 0] != this.symbol) &&
+                (this.board[0, 1] != 0 && this.board[0, 1] != this.symbol))
+                return new Tuple<int, int>(0, 2);
+            else if ((this.board[0, 0] != 0 && this.board[0, 0] != this.symbol) &&
+                (this.board[0, 2] != 0 && this.board[0, 2] != this.symbol))
+                return new Tuple<int, int>(0, 1);
+            else if ((this.board[0, 2] != 0 && this.board[0, 2] != this.symbol) &&
+                (this.board[0, 1] != 0 && this.board[0, 1] != this.symbol))
+                return new Tuple<int, int>(0, 0);
+            // horizontal center row
+            else if ((this.board[1, 0] != 0 && this.board[1, 0] != this.symbol) &&
+                (this.board[1, 1] != 0 && this.board[1, 1] != this.symbol))
+                return new Tuple<int, int>(1, 2);
+            else if ((this.board[1, 0] != 0 && this.board[1, 0] != this.symbol) &&
+                (this.board[1, 2] != 0 && this.board[1, 2] != this.symbol))
+                return new Tuple<int, int>(1, 1);
+            else if ((this.board[1, 2] != 0 && this.board[1, 2] != this.symbol) &&
+                (this.board[1, 1] != 0 && this.board[1, 1] != this.symbol))
+                return new Tuple<int, int>(1, 0);
+            // horizontal bottom row
+            else if ((this.board[2, 0] != 0 && this.board[2, 0] != this.symbol) &&
+                (this.board[2, 1] != 0 && this.board[2, 1] != this.symbol))
+                return new Tuple<int, int>(2, 2);
+            else if ((this.board[2, 0] != 0 && this.board[2, 0] != this.symbol) &&
+                (this.board[2, 2] != 0 && this.board[2, 2] != this.symbol))
+                return new Tuple<int, int>(2, 1);
+            else if ((this.board[2, 2] != 0 && this.board[2, 2] != this.symbol) &&
+                (this.board[2, 1] != 0 && this.board[2, 1] != this.symbol))
+                return new Tuple<int, int>(2, 0);
+            // vertical left column
+            else if ((this.board[0, 0] != 0 && this.board[0, 0] != this.symbol) &&
+                (this.board[1, 0] != 0 && this.board[1, 0] != this.symbol))
+                return new Tuple<int, int>(2, 0);
+            else if ((this.board[0, 0] != 0 && this.board[0, 0] != this.symbol) &&
+                (this.board[2, 0] != 0 && this.board[2, 0] != this.symbol))
+                return new Tuple<int, int>(1, 0);
+            else if ((this.board[2, 0] != 0 && this.board[2, 0] != this.symbol) &&
+                (this.board[1, 0] != 0 && this.board[1, 0] != this.symbol))
+                return new Tuple<int, int>(0, 0);
+            // vertical middle column
+            else if ((this.board[0, 1] != 0 && this.board[0, 1] != this.symbol) &&
+                (this.board[1, 1] != 0 && this.board[1, 1] != this.symbol))
+                return new Tuple<int, int>(2, 1);
+            else if ((this.board[0, 1] != 0 && this.board[0, 1] != this.symbol) &&
+                (this.board[2, 1] != 0 && this.board[2, 1] != this.symbol))
+                return new Tuple<int, int>(1, 1);
+            else if ((this.board[2, 1] != 0 && this.board[2, 1] != this.symbol) &&
+                (this.board[1, 1] != 0 && this.board[1, 1] != this.symbol))
+                return new Tuple<int, int>(0, 1);
+            // vertical right column
+            else if ((this.board[0, 2] != 0 && this.board[0, 2] != this.symbol) &&
+                (this.board[1, 2] != 0 && this.board[1, 2] != this.symbol))
+                return new Tuple<int, int>(2, 2);
+            else if ((this.board[0, 2] != 0 && this.board[0, 2] != this.symbol) &&
+                (this.board[2, 2] != 0 && this.board[2, 2] != this.symbol))
+                return new Tuple<int, int>(1, 2);
+            else if ((this.board[2, 2] != 0 && this.board[2, 2] != this.symbol) &&
+                (this.board[1, 2] != 0 && this.board[1, 2] != this.symbol))
+                return new Tuple<int, int>(0, 2);
+            // diagonal down right
+            else if ((this.board[0, 0] != 0 && this.board[0, 0] != this.symbol) &&
+                (this.board[1, 1] != 0 && this.board[1, 1] != this.symbol))
+                return new Tuple<int, int>(2, 2);
+            else if ((this.board[0, 0] != 0 && this.board[0, 0] != this.symbol) &&
+                (this.board[2, 2] != 0 && this.board[2, 2] != this.symbol))
+                return new Tuple<int, int>(1, 1);
+            else if ((this.board[2, 2] != 0 && this.board[2, 2] != this.symbol) &&
+                (this.board[1, 1] != 0 && this.board[1, 1] != this.symbol))
+                return new Tuple<int, int>(0, 0);
+            // diagonal up right
+            else if ((this.board[0, 2] != 0 && this.board[0, 2] != this.symbol) &&
+                (this.board[1, 1] != 0 && this.board[1, 1] != this.symbol))
+                return new Tuple<int, int>(2, 0);
+            else if ((this.board[0, 2] != 0 && this.board[0, 2] != this.symbol) &&
+                (this.board[2, 0] != 0 && this.board[2, 0] != this.symbol))
+                return new Tuple<int, int>(1, 1);
+            else if ((this.board[2, 0] != 0 && this.board[2, 0] != this.symbol) &&
+                (this.board[1, 1] != 0 && this.board[1, 1] != this.symbol))
+                return new Tuple<int, int>(0, 2);
+            else
+                return null;
         }
     }
 }

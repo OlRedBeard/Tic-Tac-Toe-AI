@@ -14,6 +14,8 @@ using MyTicTacToeTournament;
 // Game Player
 using TicTacToeBasePlayer;
 using GerritEasyPlayer;
+using GerritModeratePlayer;
+using GerritDifficultPlayer;
 
 namespace MyTicTacToeTournament
 {
@@ -30,7 +32,7 @@ namespace MyTicTacToeTournament
         {
             winner = null;
             TicTacToeEasy p1 = new TicTacToeEasy(1);
-            TicTacToeBase p2 = new TicTacToeBase(-1);
+            TicTacToeDifficult p2 = new TicTacToeDifficult(-1);
             GameState g = new GameState(p1, p2);
             g.WinnerIs += G_WinnerIs;
             g.Play();

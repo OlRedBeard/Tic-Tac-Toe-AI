@@ -3,9 +3,9 @@ using TicTacToeBasePlayer;
 
 namespace GerritModeratePlayer
 {
-    public class TiTacToeModerate : TicTacToeBase
+    public class TicTacToeModerate : TicTacToeBase
     {
-        public TiTacToeModerate(int symbol) : base(symbol)
+        public TicTacToeModerate(int symbol) : base(symbol)
         {
             this.playerName = "~n00bSl4y3r~";
         }

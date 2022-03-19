@@ -5,6 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GerritDifficultPlayer\GerritDifficultPlayer.csproj" />
+    <ProjectReference Include="..\GerritEasyPlayer\GerritEasyPlayer.csproj" />
+    <ProjectReference Include="..\GerritModeratePlayer\GerritModeratePlayer.csproj" />
     <ProjectReference Include="..\TicTacToeBasePlayer\TicTacToeBasePlayer.csproj" />
   </ItemGroup>
 
