@@ -46,5 +46,51 @@ namespace MyTicTacToeTournament
         {
             this.winner = p;
         }
+
+        private void btnTournament_Click(object sender, EventArgs e)
+        {
+            int numPlayers = 0;
+
+            if (chkEasy.Checked)
+                numPlayers++;
+            if (chkModerate.Checked)
+                numPlayers++;
+            if (chkDifficult.Checked)
+                numPlayers++;
+
+            if (chkEasy.Checked != true && chkModerate.Checked != true && chkDifficult.Checked != true)
+                MessageBox.Show("Select at Least One Player");            
+            else
+            {
+                Tournament t = new Tournament();
+                t.MatchResult += T_MatchResult;
+                if (chkEasy.Checked)
+                {
+                    t.AddPlayer(new TicTacToeEasy(1));
+                    if (numPlayers == 1)
+                        t.AddPlayer(new TicTacToeEasy(-1));
+                }
+                if (chkModerate.Checked)
+                {
+                    t.AddPlayer(new TicTacToeModerate(1));
+                    if (numPlayers == 1)
+                        t.AddPlayer(new TicTacToeModerate(-1));
+                }
+                if (chkDifficult.Checked)
+                {
+                    t.AddPlayer(new TicTacToeDifficult(1));
+                    if (numPlayers == 1)
+                        t.AddPlayer(new TicTacToeDifficult(-1));
+                }
+
+                t.Play((int)numMatches.Value);
+            }
+            
+        }
+
+        private void T_MatchResult(Dictionary<string, Tuple<int, int, int>> d)
+        {
+            lstMatchResults.DataSource = d.ToList();
+        }
     }
 }

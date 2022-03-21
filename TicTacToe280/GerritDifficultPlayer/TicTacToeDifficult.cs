@@ -333,7 +333,6 @@ namespace GerritDifficultPlayer
             // https://www.wikihow.com/Win-at-Tic-Tac-Toe#Never_Losing_when_Playing_Second_sub
             return theMove;
         }
-
         public Tuple<int, int> CheckForWin()
         {
             // horizontal on top row

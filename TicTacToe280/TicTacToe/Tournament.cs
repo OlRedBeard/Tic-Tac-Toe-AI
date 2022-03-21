@@ -28,7 +28,7 @@ namespace TicTacToe
 
         public Tournament()
         {
-
+            
         }
 
         public void Play(int numMatches)
@@ -43,7 +43,7 @@ namespace TicTacToe
 
                 one = competitors[j];
                 two = competitors[j + 1];
-                
+                Tuple<int, int, int> scoreBoard = new Tuple<int, int, int>(p1wins, p2wins, ties);
 
                 if (one is TicTacToeEasy)
                     one = new TicTacToeEasy(1);
@@ -58,22 +58,22 @@ namespace TicTacToe
                     two = new TicTacToeModerate(-1);
                 else
                     two = new TicTacToeDifficult(-1);
-
                 
                 p1score.Add(one.Name(), 0);
-                p2score.Add(two.Name(), 0);
-                GameState g = new GameState(one, two);
-                g.WinnerIs += G_WinnerIs;
+                p2score.Add(two.Name(), 0);                
 
                 for (int i = 0; i < rounds; i++)
                 {
-                    g.Play();
+                    GameState g = new GameState(one, two);
+                    g.WinnerIs += G_WinnerIs;
+                    g.Play();                    
                 }
 
-                Tuple<int, int, int> scoreBoard = new Tuple<int, int, int>(p1wins, p2wins, ties);
+                scoreBoard = new Tuple<int, int, int>(p1wins, p2wins, ties);
                 matchRecord.Add(one.Name() + " vs. " + two.Name(), scoreBoard);
-                MatchResult(matchRecord);
             }
+
+            MatchResult(matchRecord);
         }
 
         private void G_WinnerIs(ITicTacToePlayer p)
