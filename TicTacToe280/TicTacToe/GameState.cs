@@ -120,6 +120,9 @@ namespace TicTacToe
                 // Someone won diagonally
                 WinnerIs(players.Where(x => x.Symbol() == board[2, 0]).FirstOrDefault());
             }
+
+            if (AvailableMoves.Count == 0)
+                WinnerIs(null);
         }
 
         public void UpdateBothPlayers()

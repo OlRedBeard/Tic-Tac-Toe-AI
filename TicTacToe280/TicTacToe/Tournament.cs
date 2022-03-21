@@ -42,35 +42,39 @@ namespace TicTacToe
                 ties = 0;
 
                 one = competitors[j];
-                two = competitors[j + 1];
-                Tuple<int, int, int> scoreBoard = new Tuple<int, int, int>(p1wins, p2wins, ties);
-
-                if (one is TicTacToeEasy)
-                    one = new TicTacToeEasy(1);
-                else if (one is TicTacToeModerate)
-                    one = new TicTacToeModerate(1);
-                else
-                    one = new TicTacToeDifficult(1);
-
-                if (two is TicTacToeEasy)
-                    two = new TicTacToeEasy(-1);
-                else if (two is TicTacToeModerate)
-                    two = new TicTacToeModerate(-1);
-                else
-                    two = new TicTacToeDifficult(-1);
-                
                 p1score.Add(one.Name(), 0);
-                p2score.Add(two.Name(), 0);                
 
-                for (int i = 0; i < rounds; i++)
-                {
-                    GameState g = new GameState(one, two);
-                    g.WinnerIs += G_WinnerIs;
-                    g.Play();                    
-                }
+                for (int k = j + 1; k < competitors.Count; k++)
+                {                    
+                    two = competitors[j + 1];
+                    Tuple<int, int, int> scoreBoard = new Tuple<int, int, int>(p1wins, p2wins, ties);
 
-                scoreBoard = new Tuple<int, int, int>(p1wins, p2wins, ties);
-                matchRecord.Add(one.Name() + " vs. " + two.Name(), scoreBoard);
+                    if (one is TicTacToeEasy)
+                        one = new TicTacToeEasy(1);
+                    else if (one is TicTacToeModerate)
+                        one = new TicTacToeModerate(1);
+                    else
+                        one = new TicTacToeDifficult(1);
+
+                    if (two is TicTacToeEasy)
+                        two = new TicTacToeEasy(-1);
+                    else if (two is TicTacToeModerate)
+                        two = new TicTacToeModerate(-1);
+                    else
+                        two = new TicTacToeDifficult(-1);
+                    
+                    p2score.Add(two.Name(), 0);
+
+                    for (int i = 0; i < rounds; i++)
+                    {
+                        GameState g = new GameState(one, two);
+                        g.WinnerIs += G_WinnerIs;
+                        g.Play();
+                    }
+
+                    scoreBoard = new Tuple<int, int, int>(p1wins, p2wins, ties);
+                    matchRecord.Add(one.Name() + " vs. " + two.Name(), scoreBoard);
+                }                
             }
 
             MatchResult(matchRecord);
