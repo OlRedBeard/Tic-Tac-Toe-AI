@@ -7,7 +7,7 @@ namespace GerritModeratePlayer
     {
         public TicTacToeModerate(int symbol) : base(symbol)
         {
-            this.playerName = "~n00bSl4y3r~";
+            this.playername = "~n00bSl4y3r~";
         }
 
         public override Tuple<int, int> MakeMove()

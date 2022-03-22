@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GerritModeratePlayer", "Ger
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GerritDifficultPlayer", "GerritDifficultPlayer\GerritDifficultPlayer.csproj", "{5FC048F7-BA26-4275-9782-432225E944FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacTests", "TicTacTests\TicTacTests.csproj", "{7DD1DD29-D85F-4A33-97EF-BB01125681BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicTacTests", "TicTacTests\TicTacTests.csproj", "{7DD1DD29-D85F-4A33-97EF-BB01125681BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToeClassTournament", "TicTacToeClassTournament\TicTacToeClassTournament.csproj", "{4E681FD6-9942-40C4-B6F8-2AA3354EF3FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{7DD1DD29-D85F-4A33-97EF-BB01125681BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DD1DD29-D85F-4A33-97EF-BB01125681BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DD1DD29-D85F-4A33-97EF-BB01125681BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E681FD6-9942-40C4-B6F8-2AA3354EF3FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E681FD6-9942-40C4-B6F8-2AA3354EF3FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E681FD6-9942-40C4-B6F8-2AA3354EF3FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E681FD6-9942-40C4-B6F8-2AA3354EF3FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

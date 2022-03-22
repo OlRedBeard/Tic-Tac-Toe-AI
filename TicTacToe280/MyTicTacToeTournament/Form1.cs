@@ -49,15 +49,6 @@ namespace MyTicTacToeTournament
 
         private void btnTournament_Click(object sender, EventArgs e)
         {
-            int numPlayers = 0;
-
-            if (chkEasy.Checked)
-                numPlayers++;
-            if (chkModerate.Checked)
-                numPlayers++;
-            if (chkDifficult.Checked)
-                numPlayers++;
-
             if (chkEasy.Checked != true && chkModerate.Checked != true && chkDifficult.Checked != true)
                 MessageBox.Show("Select at Least One Player");            
             else
@@ -67,20 +58,17 @@ namespace MyTicTacToeTournament
                 if (chkEasy.Checked)
                 {
                     t.AddPlayer(new TicTacToeEasy(1));
-                    if (numPlayers == 1)
-                        t.AddPlayer(new TicTacToeEasy(-1));
+                    t.AddPlayer(new TicTacToeEasy(-1));
                 }
                 if (chkModerate.Checked)
                 {
                     t.AddPlayer(new TicTacToeModerate(1));
-                    if (numPlayers == 1)
-                        t.AddPlayer(new TicTacToeModerate(-1));
+                    t.AddPlayer(new TicTacToeModerate(-1));
                 }
                 if (chkDifficult.Checked)
                 {
                     t.AddPlayer(new TicTacToeDifficult(1));
-                    if (numPlayers == 1)
-                        t.AddPlayer(new TicTacToeDifficult(-1));
+                    t.AddPlayer(new TicTacToeDifficult(-1));
                 }
 
                 t.Play((int)numMatches.Value);
@@ -88,9 +76,22 @@ namespace MyTicTacToeTournament
             
         }
 
-        private void T_MatchResult(Dictionary<string, Tuple<int, int, int>> d)
+        private void T_MatchResult(Dictionary<string, Tuple<int, int, int>> d, Dictionary<string, int> w)
         {
-            lstMatchResults.DataSource = d.ToList();
+            lstMatchResults.Items.Clear();
+            lstWinRecords.Items.Clear();
+
+            foreach(KeyValuePair<string, Tuple<int, int, int>> kvp in d)
+            {
+                string tmp = kvp.Key + "= P1: " + kvp.Value.Item1 + ", P2: " + kvp.Value.Item2 + ", Tie: " + kvp.Value.Item3;
+                lstMatchResults.Items.Add(tmp);
+            }
+
+            foreach(KeyValuePair<string, int> kvp in w)
+            {
+                string tmp = kvp.Key + " Wins: " + kvp.Value;
+                lstWinRecords.Items.Add(tmp);
+            }
         }
     }
 }

@@ -10,14 +10,14 @@ namespace TicTacToeBasePlayer
         protected Random rnd = new Random(srnd.Next());
         // Make a game board to represent the game state
         protected int[,] board;
-        protected string playerName = "";
+        protected string playername = "";
         protected int symbol = 0;
         protected List<Tuple<int, int>> availableMoves = new List<Tuple<int, int>>();
 
         public TicTacToeBase(int symbol)
         {
             this.symbol = symbol;
-            this.playerName = "basePlayer";
+            this.playername = "basePlayer";
         }
 
         public void GameChanged(int[,] g, List<Tuple<int, int>> moves)
@@ -40,7 +40,7 @@ namespace TicTacToeBasePlayer
 
         public string Name()
         {
-            return this.playerName;
+            return this.playername;
         }
 
         public int Symbol()

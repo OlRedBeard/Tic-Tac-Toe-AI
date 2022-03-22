@@ -7,7 +7,7 @@ namespace GerritDifficultPlayer
     {
         public TicTacToeDifficult(int symbol) : base(symbol)
         {
-            this.playerName = "Matthew Broderic";
+            this.playername = "Matthew Broderic";
         }
 
         public override Tuple<int, int> MakeMove()

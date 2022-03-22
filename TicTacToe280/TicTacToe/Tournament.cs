@@ -12,18 +12,12 @@ namespace TicTacToe
 {
     public class Tournament
     {
-        private List<ITicTacToePlayer> competitors = new List<ITicTacToePlayer>();
-        ITicTacToePlayer one;
-        ITicTacToePlayer two;
-
-        Dictionary<string, int> p1score = new Dictionary<string, int>();
-        Dictionary<string, int> p2score = new Dictionary<string, int>();
+        ITicTacToePlayer winner = null;
+        List<ITicTacToePlayer> competitors = new List<ITicTacToePlayer>();
         Dictionary<string, Tuple<int, int, int>> matchRecord = new Dictionary<string, Tuple<int, int, int>>();
-        int p1wins;
-        int p2wins;
-        int ties;
+        Dictionary<string, int> winRecord = new Dictionary<string, int>();
 
-        public delegate void ReportMatch(Dictionary<string, Tuple<int, int, int>> d);
+        public delegate void ReportMatch(Dictionary<string, Tuple<int, int, int>> d, Dictionary<string, int> w);
         public event ReportMatch MatchResult;
 
         public Tournament()
@@ -35,67 +29,83 @@ namespace TicTacToe
         {
             int rounds = numMatches;
 
-            for (int j = 0; j < competitors.Count - 1; j++)
+            foreach (ITicTacToePlayer p1 in competitors)
             {
-                p1wins = 0;
-                p2wins = 0;
-                ties = 0;
-
-                one = competitors[j];
-                p1score.Add(one.Name(), 0);
-
-                for (int k = j + 1; k < competitors.Count; k++)
-                {                    
-                    two = competitors[j + 1];
-                    Tuple<int, int, int> scoreBoard = new Tuple<int, int, int>(p1wins, p2wins, ties);
-
-                    if (one is TicTacToeEasy)
-                        one = new TicTacToeEasy(1);
-                    else if (one is TicTacToeModerate)
-                        one = new TicTacToeModerate(1);
-                    else
-                        one = new TicTacToeDifficult(1);
-
-                    if (two is TicTacToeEasy)
-                        two = new TicTacToeEasy(-1);
-                    else if (two is TicTacToeModerate)
-                        two = new TicTacToeModerate(-1);
-                    else
-                        two = new TicTacToeDifficult(-1);
-                    
-                    p2score.Add(two.Name(), 0);
-
-                    for (int i = 0; i < rounds; i++)
+                foreach (ITicTacToePlayer p2 in competitors)
+                {
+                    if (p1.Symbol() != p2.Symbol())
                     {
-                        GameState g = new GameState(one, two);
-                        g.WinnerIs += G_WinnerIs;
-                        g.Play();
+                        for (int i = 0; i < rounds; i++)
+                        {
+                            // Set up the game state with 2 players
+                            GameState g = new GameState(p1, p2);
+                            // Hook into the win event
+                            g.WinnerIs += G_WinnerIs;
+                            // Play the game
+                            g.Play();
+                            // Check for winner
+                            if (winner == null)
+                            {
+                                // Tie
+                                AddToTracker(p1.Name() + " vs. " + p2.Name(), new Tuple<int, int, int>(0, 0, 1));
+                                
+                            }
+                            else if (winner.Symbol() == p1.Symbol())
+                            {
+                                AddToTracker(p1.Name() + " vs. " + p2.Name(), new Tuple<int, int, int>(1, 0, 0));
+                                AddToRecord(p1.Name(), 1);
+                            }
+                            else if (winner.Symbol() == p2.Symbol())
+                            {
+                                AddToTracker(p1.Name() + " vs. " + p2.Name(), new Tuple<int, int, int>(0, 1, 0));
+                                AddToRecord(p2.Name(), 1);
+                            }
+                            // Reset the winner to null
+                            winner = null;
+                        }
                     }
-
-                    scoreBoard = new Tuple<int, int, int>(p1wins, p2wins, ties);
-                    matchRecord.Add(one.Name() + " vs. " + two.Name(), scoreBoard);
-                }                
+                }
             }
 
-            MatchResult(matchRecord);
+            MatchResult(matchRecord, winRecord);
+        }
+
+        public void AddToRecord(string item, int wins)
+        {
+            if (!winRecord.ContainsKey(item))
+            {
+                // First time adding player to dictionary
+                winRecord[item] = wins;
+            }
+            else
+            {
+                int tmp = winRecord[item] + wins;
+                winRecord[item] = tmp;
+            }
+        }
+
+        public void AddToTracker(string item, Tuple<int, int, int> p1p2tie)
+        {
+            if (!matchRecord.ContainsKey(item))
+            {
+                // First time adding player to dictionary
+                matchRecord[item] = p1p2tie;
+            }
+            else
+            {
+                Tuple<int, int, int> tmp = new Tuple<int, int, int>(
+                    matchRecord[item].Item1 + p1p2tie.Item1,
+                    matchRecord[item].Item2 + p1p2tie.Item2,
+                    matchRecord[item].Item3 + p1p2tie.Item3
+                    );
+
+                matchRecord[item] = tmp;
+            }
         }
 
         private void G_WinnerIs(ITicTacToePlayer p)
         {
-            if (p == one)
-            {
-                p1score[one.Name()] += 1;
-                p1wins += 1;
-            }                
-            else if (p == two)
-            {
-                p2score[two.Name()] += 1;
-                p2wins += 1;
-            }                
-            else if (p == null)
-                ties += 1;
-            else
-                throw new Exception("Players not initialized correctly.");
+            this.winner = p;
         }
 
         public void AddPlayer(ITicTacToePlayer player)

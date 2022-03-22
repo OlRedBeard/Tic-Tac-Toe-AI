@@ -130,8 +130,8 @@ namespace TicTacToe
             ITicTacToePlayer p1 = players.Dequeue();
             ITicTacToePlayer p2 = players.Dequeue();
 
-            p1.GameChanged(board, AvailableMoves);
-            p2.GameChanged(board, AvailableMoves);
+            p1.GameChanged(board.Clone() as int[,], AvailableMoves);
+            p2.GameChanged(board.Clone() as int[,], AvailableMoves);
 
             players.Enqueue(p1);
             players.Enqueue(p2);

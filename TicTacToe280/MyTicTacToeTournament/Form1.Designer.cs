@@ -38,12 +38,13 @@ namespace MyTicTacToeTournament
             this.numMatches = new System.Windows.Forms.NumericUpDown();
             this.btnTournament = new System.Windows.Forms.Button();
             this.lstMatchResults = new System.Windows.Forms.ListBox();
+            this.lstWinRecords = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.numMatches)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(8, 187);
+            this.button1.Location = new System.Drawing.Point(12, 102);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
@@ -142,11 +143,21 @@ namespace MyTicTacToeTournament
             this.lstMatchResults.Size = new System.Drawing.Size(430, 424);
             this.lstMatchResults.TabIndex = 8;
             // 
+            // lstWinRecords
+            // 
+            this.lstWinRecords.FormattingEnabled = true;
+            this.lstWinRecords.ItemHeight = 15;
+            this.lstWinRecords.Location = new System.Drawing.Point(12, 144);
+            this.lstWinRecords.Name = "lstWinRecords";
+            this.lstWinRecords.Size = new System.Drawing.Size(311, 289);
+            this.lstWinRecords.TabIndex = 9;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lstWinRecords);
             this.Controls.Add(this.lstMatchResults);
             this.Controls.Add(this.btnTournament);
             this.Controls.Add(this.numMatches);
@@ -175,6 +186,7 @@ namespace MyTicTacToeTournament
         private System.Windows.Forms.NumericUpDown numMatches;
         private System.Windows.Forms.Button btnTournament;
         private System.Windows.Forms.ListBox lstMatchResults;
+        private System.Windows.Forms.ListBox lstWinRecords;
     }
 }
 
