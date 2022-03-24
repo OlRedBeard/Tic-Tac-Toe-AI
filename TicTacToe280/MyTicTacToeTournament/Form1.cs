@@ -93,5 +93,10 @@ namespace MyTicTacToeTournament
                 lstWinRecords.Items.Add(tmp);
             }
         }
+
+        private void lstMatchResults_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

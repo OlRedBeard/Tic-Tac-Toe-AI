@@ -39,6 +39,7 @@ namespace MyTicTacToeTournament
             this.btnTournament = new System.Windows.Forms.Button();
             this.lstMatchResults = new System.Windows.Forms.ListBox();
             this.lstWinRecords = new System.Windows.Forms.ListBox();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numMatches)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,6 +51,7 @@ namespace MyTicTacToeTournament
             this.button1.TabIndex = 0;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // chkEasy
@@ -140,8 +142,9 @@ namespace MyTicTacToeTournament
             this.lstMatchResults.ItemHeight = 15;
             this.lstMatchResults.Location = new System.Drawing.Point(358, 9);
             this.lstMatchResults.Name = "lstMatchResults";
-            this.lstMatchResults.Size = new System.Drawing.Size(430, 424);
+            this.lstMatchResults.Size = new System.Drawing.Size(430, 319);
             this.lstMatchResults.TabIndex = 8;
+            this.lstMatchResults.SelectedIndexChanged += new System.EventHandler(this.lstMatchResults_SelectedIndexChanged);
             // 
             // lstWinRecords
             // 
@@ -149,14 +152,25 @@ namespace MyTicTacToeTournament
             this.lstWinRecords.ItemHeight = 15;
             this.lstWinRecords.Location = new System.Drawing.Point(12, 144);
             this.lstWinRecords.Name = "lstWinRecords";
-            this.lstWinRecords.Size = new System.Drawing.Size(311, 289);
+            this.lstWinRecords.Size = new System.Drawing.Size(311, 184);
             this.lstWinRecords.TabIndex = 9;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(9, 341);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(126, 20);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Play Tic-Tac-Toe:";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.lstWinRecords);
             this.Controls.Add(this.lstMatchResults);
             this.Controls.Add(this.btnTournament);
@@ -187,6 +201,7 @@ namespace MyTicTacToeTournament
         private System.Windows.Forms.Button btnTournament;
         private System.Windows.Forms.ListBox lstMatchResults;
         private System.Windows.Forms.ListBox lstWinRecords;
+        private System.Windows.Forms.Label label3;
     }
 }
 
