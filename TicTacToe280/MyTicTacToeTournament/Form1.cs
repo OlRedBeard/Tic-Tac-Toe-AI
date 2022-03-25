@@ -26,6 +26,7 @@ namespace MyTicTacToeTournament
         public Form1()
         {
             InitializeComponent();
+            cboOpp.SelectedIndex = 0;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -97,6 +98,24 @@ namespace MyTicTacToeTournament
         private void lstMatchResults_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnPlay_Click(object sender, EventArgs e)
+        {
+            if(!rdoX.Checked && !rdoO.Checked)
+                MessageBox.Show("Select X or O");
+            else
+            {
+                HumanPlayer hp;
+                if (rdoX.Checked)
+                    hp = new HumanPlayer("X", cboOpp.Text);
+                else
+                    hp = new HumanPlayer("O", cboOpp.Text);
+
+                this.Hide();
+                hp.ShowDialog();
+                this.Show();
+            }
         }
     }
 }

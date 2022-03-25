@@ -47,6 +47,7 @@ namespace MyTicTacToeTournament
             this.btn00.Size = new System.Drawing.Size(50, 50);
             this.btn00.TabIndex = 0;
             this.btn00.UseVisualStyleBackColor = true;
+            this.btn00.Click += new System.EventHandler(this.Click);
             // 
             // btn01
             // 
@@ -55,6 +56,7 @@ namespace MyTicTacToeTournament
             this.btn01.Size = new System.Drawing.Size(50, 50);
             this.btn01.TabIndex = 1;
             this.btn01.UseVisualStyleBackColor = true;
+            this.btn01.Click += new System.EventHandler(this.Click);
             // 
             // btn02
             // 
@@ -63,6 +65,7 @@ namespace MyTicTacToeTournament
             this.btn02.Size = new System.Drawing.Size(50, 50);
             this.btn02.TabIndex = 2;
             this.btn02.UseVisualStyleBackColor = true;
+            this.btn02.Click += new System.EventHandler(this.Click);
             // 
             // btn12
             // 
@@ -71,6 +74,7 @@ namespace MyTicTacToeTournament
             this.btn12.Size = new System.Drawing.Size(50, 50);
             this.btn12.TabIndex = 5;
             this.btn12.UseVisualStyleBackColor = true;
+            this.btn12.Click += new System.EventHandler(this.Click);
             // 
             // btn11
             // 
@@ -79,6 +83,7 @@ namespace MyTicTacToeTournament
             this.btn11.Size = new System.Drawing.Size(50, 50);
             this.btn11.TabIndex = 4;
             this.btn11.UseVisualStyleBackColor = true;
+            this.btn11.Click += new System.EventHandler(this.Click);
             // 
             // btn10
             // 
@@ -87,6 +92,7 @@ namespace MyTicTacToeTournament
             this.btn10.Size = new System.Drawing.Size(50, 50);
             this.btn10.TabIndex = 3;
             this.btn10.UseVisualStyleBackColor = true;
+            this.btn10.Click += new System.EventHandler(this.Click);
             // 
             // btn22
             // 
@@ -95,6 +101,7 @@ namespace MyTicTacToeTournament
             this.btn22.Size = new System.Drawing.Size(50, 50);
             this.btn22.TabIndex = 8;
             this.btn22.UseVisualStyleBackColor = true;
+            this.btn22.Click += new System.EventHandler(this.Click);
             // 
             // btn21
             // 
@@ -103,6 +110,7 @@ namespace MyTicTacToeTournament
             this.btn21.Size = new System.Drawing.Size(50, 50);
             this.btn21.TabIndex = 7;
             this.btn21.UseVisualStyleBackColor = true;
+            this.btn21.Click += new System.EventHandler(this.Click);
             // 
             // btn20
             // 
@@ -111,6 +119,7 @@ namespace MyTicTacToeTournament
             this.btn20.Size = new System.Drawing.Size(50, 50);
             this.btn20.TabIndex = 6;
             this.btn20.UseVisualStyleBackColor = true;
+            this.btn20.Click += new System.EventHandler(this.Click);
             // 
             // HumanPlayer
             // 
@@ -128,6 +137,7 @@ namespace MyTicTacToeTournament
             this.Controls.Add(this.btn00);
             this.Name = "HumanPlayer";
             this.Text = "HumanPlayer";
+            this.Load += new System.EventHandler(this.HumanPlayer_Load);
             this.ResumeLayout(false);
 
         }
